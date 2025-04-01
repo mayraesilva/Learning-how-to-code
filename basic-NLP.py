@@ -6,9 +6,12 @@
 # felicidade_read = felicidade.readlines() #transforming into lists for each line
 # print(felicidade_read)
 # felicidade_modified = []
+
+
 import string
 
 
+#Acessando o arquivo (file) e devolvendo uma lista de listas que contém strings
 def transform_the_file(file):
     open_the_file = open(file, 'r', encoding='utf-8')
     file_read = open_the_file.readlines()
@@ -22,8 +25,10 @@ def transform_the_file(file):
     
     return file_modified
 
-#recebendo uma linha e devolvendo sem pontuação; a linha é uma string e devolve uma string
 
+
+
+#Recebendo uma linha e devolvendo sem pontuação; a linha é uma string e devolve uma string
 def clean_line(line): 
     result = line
     for char in string.punctuation:
@@ -36,8 +41,7 @@ def clean_line(line):
 
 
 
-#separando a linha (string) em uma lista de  palavras (strings)
-
+#separando a linha (string) em uma lista de  palavras (list of strings)
 def tokenize(line):
     separated_line = line.split()
     return separated_line
@@ -55,13 +59,15 @@ def decide_emotion(lines_as_tokens):
     text_length = sum(text_length) #inteiro representanto o tamanho do texto geral
     print(f"O texto tem {text_length} palavras")
 
-    alegria = []
-    tristeza = []
+    #Emotions we are searching for
+    positivity = []
+    sadness = []
+    swear = []
+    anxiousness = []
     
 
-
-    positive_emotions = len(alegria)
-    negative_emotions = len(tristeza)
+    positive_emotions = len(positivity)
+    negative_emotions = len(sadness) + len(swear) + len(anxiousness)
 
     positive_text = positive_emotions / text_length
     negative_text = negative_emotions / text_length
@@ -71,7 +77,7 @@ def decide_emotion(lines_as_tokens):
        return "posemo"
     else:
         print("O tom geral do texto é negativo")
-        return "negamo"
+        return "negemo"
     
 
 def basic_NLP(file):
