@@ -47,8 +47,20 @@ def tokenize(line):
     return separated_line
 
 
+
+#Takes in a word (string) to check in the dictionary
 def get_emotion(word):
+    fictional_dict = {'126': 'posemo'}
+    fictional_dict_word = {'felicidade': ['126', '125', '359']}
+    
+    if word in fictional_dict_word.keys():
+        emotion_class = fictional_dict_word['word']
+        for emotion_class in fictional_dict.keys():
+
+        
+
     pass
+
 
 #recebe uma lista de listas e devolve uma porcentagem para avaliar o tom
 def decide_emotion(lines_as_tokens):
@@ -59,15 +71,22 @@ def decide_emotion(lines_as_tokens):
     text_length = sum(text_length) #inteiro representanto o tamanho do texto geral
     print(f"O texto tem {text_length} palavras")
 
-    #Emotions we are searching for
+    #Emotions we are searching for:
     positivity = []
-    sadness = []
+    negativity = []
     swear = []
     anxiousness = []
+
+
+    if get_emotion(word) == 'posemo':
+        positivity.append(get_emotino(word))
+
+    elif get_emotion(word) == 'negemo':
+        negativity.append(get_emotino(word))
     
 
     positive_emotions = len(positivity)
-    negative_emotions = len(sadness) + len(swear) + len(anxiousness)
+    negative_emotions = len(negativity) + len(swear) + len(anxiousness)
 
     positive_text = positive_emotions / text_length
     negative_text = negative_emotions / text_length
@@ -82,7 +101,7 @@ def decide_emotion(lines_as_tokens):
 
 def basic_NLP(file):
     filex = transform_the_file(file)
-    print("file content ", filex)
+    #print("file content ", filex)
     new_lines = []
     for line in filex:
         new_lines.append(clean_line(line))
