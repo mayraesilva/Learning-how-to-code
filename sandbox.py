@@ -48,3 +48,18 @@ dict2 = {'amora': ['Alice', '126'], 'age': 23}
 for key in dict2:
     if key in dict1.values():
         print(f"The key '{key}' from dict2 is a value in dict1.")
+
+
+def get_emotion(word):
+    fictional_dict = {'126': 'posemo'}
+    fictional_dict_word = {'felicidade': ['126', '125', '359']}
+
+    if word in fictional_dict_word.keys():
+        word_class = fictional_dict_word[word]
+        for dict_key in word_class:
+            if dict_key in fictional_dict.keys():
+                return fictional_dict[dict_key]
+    
+
+teste_da_func = get_emotion('felicidade')
+print(teste_da_func)
