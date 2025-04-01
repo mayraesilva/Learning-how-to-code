@@ -48,18 +48,30 @@ def tokenize(line):
 
 
 
-#Takes in a word (string) to check in the dictionary
+#Takes in a word (string) to check in the dictionary returns a different string with its class
 def get_emotion(word):
     fictional_dict = {'126': 'posemo'}
     fictional_dict_word = {'felicidade': ['126', '125', '359']}
-    
+
     if word in fictional_dict_word.keys():
-        emotion_class = fictional_dict_word['word']
-        for emotion_class in fictional_dict.keys():
+        word_class = fictional_dict_word['word']
+        for dict_key in word_class:
+            if dict_key in fictional_dict.keys():
+                return fictional_dict['key']
+
+        #emotion_class = fictional_dict_word['word']
+
+
+        # for emotion_class in fictional_dict.values():
+        #     if emotion_class == 'posemo':
+        #         return 'posemo'
+        #     elif emotion_class == 'negemo':
+        #         return 'negemo'
+
 
         
 
-    pass
+    #pass
 
 
 #recebe uma lista de listas e devolve uma porcentagem para avaliar o tom
@@ -79,10 +91,10 @@ def decide_emotion(lines_as_tokens):
 
 
     if get_emotion(word) == 'posemo':
-        positivity.append(get_emotino(word))
+        positivity.append(get_emotion(word))
 
     elif get_emotion(word) == 'negemo':
-        negativity.append(get_emotino(word))
+        negativity.append(get_emotion(word))
     
 
     positive_emotions = len(positivity)
@@ -112,8 +124,12 @@ def basic_NLP(file):
     
     decision = decide_emotion(lines_as_tokens)
     print(decision)
+    
 
 basic_NLP('felicidade.txt')
+
+
+
 
 #print("O tipo de arquivo de felicidade é ", type(felicidade))
 
