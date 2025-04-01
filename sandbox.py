@@ -21,3 +21,10 @@ def ftype(v):
         return f"{type(v)}<{type(list(v.keys())[0]), type(list(v.values())[0])}>"
     
     return type(v)
+
+
+txt = "welcome to the jungle"
+
+x = txt.split()
+
+print(x)
