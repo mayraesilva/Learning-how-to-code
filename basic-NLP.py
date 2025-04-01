@@ -54,10 +54,13 @@ def get_emotion(word):
     fictional_dict_word = {'felicidade': ['126', '125', '359']}
 
     if word in fictional_dict_word.keys():
-        word_class = fictional_dict_word['word']
+        word_class = fictional_dict_word[word]
         for dict_key in word_class:
             if dict_key in fictional_dict.keys():
-                return fictional_dict['key']
+                return fictional_dict[dict_key]
+    
+
+
 
         #emotion_class = fictional_dict_word['word']
 
@@ -83,6 +86,11 @@ def decide_emotion(lines_as_tokens):
     text_length = sum(text_length) #inteiro representanto o tamanho do texto geral
     print(f"O texto tem {text_length} palavras")
 
+    word_analysis = []
+    for line in lines_as_tokens:
+        for word in line:
+           word_analysis.append(get_emotion(word))
+
     #Emotions we are searching for:
     positivity = []
     negativity = []
@@ -90,11 +98,32 @@ def decide_emotion(lines_as_tokens):
     anxiousness = []
 
 
-    if get_emotion(word) == 'posemo':
-        positivity.append(get_emotion(word))
+    for word in word_analysis:
+        if word == 'posemo':
+            positivity.append(word)
 
-    elif get_emotion(word) == 'negemo':
-        negativity.append(get_emotion(word))
+        elif word == 'negemo':
+            negativity.append(word)
+        
+        elif word == 'swear':
+            swear.append(word)
+
+        elif word == 'anx':
+            anxiousness.append(word)
+            
+
+    # if get_emotion(word) == 'posemo':
+    #     positivity.append(get_emotion(word))
+
+    # elif get_emotion(word) == 'negemo':
+    #     negativity.append(get_emotion(word))
+
+    # elif get_emotion(word) == 'swear':
+    #     swear.append(get_emotion(word))
+
+    # elif get_emotion(word) == 'anx':
+    #     anxiousness.append(get_emotion(word))
+    
     
 
     positive_emotions = len(positivity)
@@ -121,10 +150,12 @@ def basic_NLP(file):
     lines_as_tokens = []
     for line in new_lines:
         lines_as_tokens.append(tokenize(line))
+
+
     
     decision = decide_emotion(lines_as_tokens)
     print(decision)
-    
+
 
 basic_NLP('felicidade.txt')
 
