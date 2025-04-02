@@ -98,12 +98,18 @@ my_dict = {'name': 'Alice', 'age': 25}
 # Create a new dictionary with additional key-value pairs
 #new_dict = dict(my_dict, city='New York', email='alice@example.com')
 
-new_dict_2 = [['name', 'aline'], ['age', '25']]
+new_dict_2 = [['name', 'aline'], ['age', '25'], ['face', ['1', '2', '3']]]
 
 new_real_dict_2 = dict(new_dict_2)
-
-
 
 # Print the new dictionary
 print(new_real_dict_2)
 # Output: {'name': 'Alice', 'age': 25, 'city': 'New York', 'email': 'alice@example.com'}
+
+lista = ['amor', '123', '456', '789']
+palavra, *emocoes = lista
+
+palavra_sentimentos = []
+palavra_sentimentos.append([palavra, emocoes])
+
+print(palavra_sentimentos)

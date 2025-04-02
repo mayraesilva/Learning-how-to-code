@@ -67,7 +67,7 @@ def read_liwc(dictionary):
         else:
             continue
     
-    print("antes de separar em listas de linhas ", liw_dic_emotions)
+    #print("antes de separar em listas de linhas ", liw_dic_emotions)
 
     new_liwc_dic_emotions = [] #to keep the emotions as lists
 
@@ -93,27 +93,30 @@ def read_liwc(dictionary):
     #print(liw_dic_words)
 
     new_liwc_dic_words = [] #list of lists, where each element is a list of word 
-    #and its associated emotions
+    #and its associated emotions by their numbers
 
+    #transform the list of strings into a list of lists
     for line in liw_dic_words:
         if '\t' in line:
             new_word = line.split('\t')
             new_liwc_dic_words.append(new_word)
     
-    print(new_liwc_dic_words)
-
-
-
-
-
-
 
     
+    #breaking the lists
+    #transform the numbers strings into a list of strings where each string is a number
+    new_words_as_a_list = []
+
+    for word_list in new_liwc_dic_words:
+        word_string, *associated_emotions = word_list #separete the word of its emotions
+        new_words_as_a_list.append([word_string, associated_emotions])
     
+    #print(new_words_as_a_list)
+    words_dict = dict(new_words_as_a_list)
+    #print(words_dict)
 
-    #print(liwc_dic)
 
-    return
+    return emotions_dict, words_dict
 
 
 
@@ -123,10 +126,16 @@ def read_liwc(dictionary):
 
 
 
-#Takes in a word (string) to check in the dictionary returns a different string with its class
-def get_emotion(word):
+#Takes in a word (string) and a dictionary 
+# to check in the dictionary and returns a different string with its class
+def get_emotion(word, dictionary):
     fictional_dict = {'126': 'posemo'}
     fictional_dict_word = {'felicidade': ['126', '125', '359']}
+
+    real_dict = read_liwc(dictionary)[0]
+    print(real_dict)
+
+
 
     if word in fictional_dict_word.keys():
         word_class = fictional_dict_word[word]
@@ -140,17 +149,7 @@ def get_emotion(word):
         #emotion_class = fictional_dict_word['word']
 
 
-        # for emotion_class in fictional_dict.values():
-        #     if emotion_class == 'posemo':
-        #         return 'posemo'
-        #     elif emotion_class == 'negemo':
-        #         return 'negemo'
-
-
-        
-
-    #pass
-
+  
 
 #recebe uma lista de listas e devolve uma porcentagem para avaliar o tom
 def decide_emotion(lines_as_tokens):
