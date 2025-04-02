@@ -23,9 +23,9 @@ def ftype(v):
     return type(v)
 
 
-# txt = "welcome to the jungle"
-# x = txt.split()
-# print(x)
+txt = "welcome to the jungle"
+x = txt.split()
+print(x)
 
 
 
@@ -63,3 +63,27 @@ def get_emotion(word):
 
 teste_da_func = get_emotion('felicidade')
 print(teste_da_func)
+
+
+my_list = ["apple", "%", "orange", "%", "grape"]
+
+target = "%"
+count = 0
+
+for item in my_list:
+    if item == target:
+        count += 1
+        if count == 2:
+            print("Second appearance, breaking...")
+            break
+        else:
+            print("First appearance, ignoring...")
+            continue
+    print("Processing:", item)
+
+
+txt = "apple/banana#cherry#orange"
+
+x = txt.split("/")
+
+print(x)

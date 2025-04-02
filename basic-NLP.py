@@ -46,16 +46,40 @@ def tokenize(line):
     return separated_line
 
 
-
+#recebe um arquivo dic e devolve em outros dois dicionários um para número e emoções
+#Outro para palavras (strings) e a lista de emoçoes associadas a elas
 def read_liwc(dictionary):
-    liwc_dic = transform_the_file(dictionary)
-    print(liwc_dic)
+    liwc_dic = transform_the_file(dictionary) #withot space and \n, this is a list of strings
+
+    liw_dic_emotions = [] #list of strings for numbers and its associated emotion
+    separation_string = '%'
+    separation_string_count = 0
+    liw_dic_words = []
+
+    for line in liwc_dic: #separating the first part
+        if line == separation_string:
+            separation_string_count += 1
+        liw_dic_emotions.append(line)
+        if separation_string_count >= 2:
+            print("emotions are separetaded, breaking...")
+            break
+            
+        else:
+            continue
+    
+    
+
+    
+    print(liw_dic_emotions)
+
+    #print(liwc_dic)
+
     return
 
 
 
 
-'LIWC2007_Portugues_win.dic'
+# 'LIWC2007_Portugues_win.dic'
 
 
 
