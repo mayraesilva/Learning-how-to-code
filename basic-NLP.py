@@ -48,6 +48,7 @@ def tokenize(line):
 
 #recebe um arquivo dic e devolve em outros dois dicionários um para número e emoções
 #Outro para palavras (strings) e a lista de emoçoes associadas a elas
+#Os dicionários estão armazenados na lista devolvida
 def read_liwc(dictionary):
     liwc_dic = transform_the_file(dictionary) #withot space and \n, this is a list of strings
 
@@ -115,8 +116,10 @@ def read_liwc(dictionary):
     words_dict = dict(new_words_as_a_list)
     #print(words_dict)
 
+    final_dictionary = [emotions_dict, words_dict]
 
-    return emotions_dict, words_dict
+
+    return final_dictionary
 
 
 
@@ -128,12 +131,15 @@ def read_liwc(dictionary):
 
 #Takes in a word (string) and a dictionary 
 # to check in the dictionary and returns a different string with its class
-def get_emotion(word, dictionary):
+def get_emotion(word, list_that_contains_dicts):
     fictional_dict = {'126': 'posemo'}
     fictional_dict_word = {'felicidade': ['126', '125', '359']}
 
-    real_dict = read_liwc(dictionary)[0]
-    print(real_dict)
+    #real_dict = read_liwc(dictionary)
+    real_dict_emotions = list_that_contains_dicts[0]
+    real_dict_words = list_that_contains_dicts[1]
+
+
 
 
 
@@ -225,12 +231,11 @@ def basic_NLP(file, dictionary):
     for line in new_lines:
         lines_as_tokens.append(tokenize(line))
 
-
-    
+    final_dictionary = read_liwc(dictionary)
     decision = decide_emotion(lines_as_tokens)
     print(decision)
 
-    read_liwc(dictionary)
+    
 
 
 basic_NLP('felicidade.txt', 'LIWC2007_Portugues_win.dic')
