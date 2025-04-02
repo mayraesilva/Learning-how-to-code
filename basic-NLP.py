@@ -40,11 +40,23 @@ def clean_line(line):
 
 
 
-
 #separando a linha (string) em uma lista de  palavras (list of strings)
 def tokenize(line):
     separated_line = line.split()
     return separated_line
+
+
+
+def read_liwc(dictionary):
+    liwc_dic = transform_the_file(dictionary)
+    print(liwc_dic)
+    return
+
+
+
+
+'LIWC2007_Portugues_win.dic'
+
 
 
 
@@ -140,7 +152,7 @@ def decide_emotion(lines_as_tokens):
         return "negemo"
     
 
-def basic_NLP(file):
+def basic_NLP(file, dictionary):
     filex = transform_the_file(file)
     #print("file content ", filex)
     new_lines = []
@@ -156,8 +168,10 @@ def basic_NLP(file):
     decision = decide_emotion(lines_as_tokens)
     print(decision)
 
+    read_liwc(dictionary)
 
-basic_NLP('felicidade.txt')
+
+basic_NLP('felicidade.txt', 'LIWC2007_Portugues_win.dic')
 
 
 
