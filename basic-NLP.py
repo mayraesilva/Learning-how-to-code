@@ -73,15 +73,39 @@ def read_liwc(dictionary):
 
     #Now we're creating new lists for each emotion
     for line in liw_dic_emotions:
-        for char in line:
-            if char == '\t':
-                new_emotion = line.split('\t')
-                new_liwc_dic_emotions.append(new_emotion)
+        if '\t' in line:
+            new_emotion = line.split('\t')
+            new_liwc_dic_emotions.append(new_emotion)
     
-    print(new_liwc_dic_emotions) #Check if the emotions are separated in lists with its number
+    #print(new_liwc_dic_emotions) #Check if the emotions are separated in lists with its number
+
 
     #Time to transform the list of lists into a dictionary
+    emotions_dict = dict(new_liwc_dic_emotions)
+    #print(emotions_dict) #check if it has become a dictionary
+
+    #Time to get the second dict using the list of lists new dict
+    for line in liwc_dic:
+        if separation_string_count >= 2:
+            liw_dic_words.append(line)
     
+    #Now liw_dic_words is a list of strings where each string is a line
+    #print(liw_dic_words)
+
+    new_liwc_dic_words = [] #list of lists, where each element is a list of word 
+    #and its associated emotions
+
+    for line in liw_dic_words:
+        if '\t' in line:
+            new_word = line.split('\t')
+            new_liwc_dic_words.append(new_word)
+    
+    print(new_liwc_dic_words)
+
+
+
+
+
 
 
     
