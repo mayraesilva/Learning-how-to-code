@@ -67,10 +67,25 @@ def read_liwc(dictionary):
         else:
             continue
     
+    print("antes de separar em listas de linhas ", liw_dic_emotions)
+
+    new_liwc_dic_emotions = [] #to keep the emotions as lists
+
+    #Now we're creating new lists for each emotion
+    for line in liw_dic_emotions:
+        for char in line:
+            if char == '\t':
+                new_emotion = line.split('\t')
+                new_liwc_dic_emotions.append(new_emotion)
+    
+    print(new_liwc_dic_emotions) #Check if the emotions are separated in lists with its number
+
+    #Time to transform the list of lists into a dictionary
     
 
+
     
-    print(liw_dic_emotions)
+    
 
     #print(liwc_dic)
 

@@ -82,8 +82,11 @@ for item in my_list:
     print("Processing:", item)
 
 
-txt = "apple/banana#cherry#orange"
+txt = ["apple/banana#cherry#orange", 'amor/odio']
+keep_separeted = []
 
-x = txt.split("/")
+for item in txt:
+    x = item.split("/")
+    keep_separeted.append(x)
 
-print(x)
+print(keep_separeted)
