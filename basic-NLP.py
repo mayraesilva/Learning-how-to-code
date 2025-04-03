@@ -1,17 +1,10 @@
 #Iniciando a tarefa de contagem de palavras e detecção de emoções de Mayra Silva
 
 
-###Arquivos a serem analisados
-# felicidade = open('felicidade.txt', 'r', encoding='utf-8')
-# felicidade_read = felicidade.readlines() #transforming into lists for each line
-# print(felicidade_read)
-# felicidade_modified = []
-
-
 import string
 
 
-#Acessando o arquivo (file) e devolvendo uma lista de listas que contém strings
+#Acessando o arquivo (file) (txt ou dic) e devolvendo uma lista de listas que contém strings
 def transform_the_file(file):
     open_the_file = open(file, 'r', encoding='utf-8')
     file_read = open_the_file.readlines()
@@ -46,7 +39,7 @@ def tokenize(line):
     return separated_line
 
 
-#recebe um arquivo dic e devolve em outros dois dicionários um para número e emoções
+#recebe um arquivo dic e devolve em outros dois dicionários dentro de uma lista: um para número e emoções (strings)
 #Outro para palavras (strings) e a lista de emoçoes associadas a elas
 #Os dicionários estão armazenados na lista devolvida
 def read_liwc(dictionary):
@@ -80,11 +73,9 @@ def read_liwc(dictionary):
     
     #print(new_liwc_dic_emotions) #Check if the emotions are separated in lists with its number
 
-
     #Time to transform the list of lists into a dictionary
     emotions_dict = dict(new_liwc_dic_emotions)
     #print(emotions_dict) #check if it has become a dictionary
-
 
 
     separation_string_count = 0
@@ -131,21 +122,16 @@ def read_liwc(dictionary):
 
 
 
-# 'LIWC2007_Portugues_win.dic'
-
-
-
-
-#Takes in a word (string) and a dictionary 
-# to check in the dictionary and returns a different string with its class
+#Takes in a word (string) and list that contains the dictionaries
+# to check in the dictionary and returns a different string with its associated class
 def get_emotion(word, list_that_contains_dicts):
-    fictional_dict = {'126': 'posemo'}
-    fictional_dict_word = {'felicidade': ['126', '125', '359']}
+    fictional_dict = {'126': 'posemo'} #Used to test
+    fictional_dict_word = {'felicidade': ['126', '125', '359']} #Used to test
 
-    #
+
     real_dict_emotions = list_that_contains_dicts[0]
     real_dict_words = list_that_contains_dicts[1]
-    emotions = []
+    emotions = [] #emotions we can identify in a word
 
 
     if word in real_dict_words.keys():
@@ -158,13 +144,9 @@ def get_emotion(word, list_that_contains_dicts):
     
 
 
-
-        #emotion_class = fictional_dict_word['word']
-
-
   
 
-#recebe uma lista de listas e devolve uma porcentagem para avaliar o tom
+#recieve a list of lists, analyse the whole text and decide if its positive or not
 def decide_emotion(lines_as_tokens, possible_dict):
     text_length = [] #lista com tamanho de cada linha
     for line in lines_as_tokens:
@@ -188,42 +170,42 @@ def decide_emotion(lines_as_tokens, possible_dict):
     for word in word_analysis:
         for emotion in word:
             if emotion == 'posemo':
-                positivity.append(emotion)
+                positivity.append(word)
 
             elif emotion == 'negemo':
-                negativity.append(emotion)
+                negativity.append(word)
         
             elif emotion == 'swear':
-                swear.append(emotion)
+                swear.append(word)
 
             elif emotion == 'anx':
-                print(word)
-                anxiousness.append(emotion)
+                
+                anxiousness.append(word)
             
 
-   
+
     
-    print(f'{len(swear)} palavra(s) ofensiva(s), {len(swear)} palavra(s) de ansiedade')
+    print(f'{len(swear)} palavra(s) ofensiva(s), {len(anxiousness)} palavra(s) de ansiedade')
     
 
     positive_emotions = len(positivity)
-    negative_emotions = len(negativity) + len(swear) + len(anxiousness)
+    negative_emotions = len(negativity) #+ len(anxiousness)
 
 
     positive_text = (positive_emotions / text_length) * 100 #porcertagem
     negative_text = (negative_emotions / text_length) * 100
 
     if positive_text > negative_text:
-       #print("O tom geral do texto é positivo")
+       
        return f"O tom geral do texto é positivo {positive_text:.2f}% versus {negative_text:.2f}% negativo"
     else:
-        #print("O tom geral do texto é negativo")
+        
         return f"O tom geral do texto é negativo {negative_text:.2f}% versus {positive_text:.2f}% positivo"
     
 
 def basic_NLP(file, dictionary):
     filex = transform_the_file(file)
-    #print("file content ", filex)
+
     new_lines = []
     for line in filex:
         new_lines.append(clean_line(line))
@@ -234,26 +216,18 @@ def basic_NLP(file, dictionary):
 
     possible_dictionary = read_liwc(dictionary)
     decision = decide_emotion(lines_as_tokens, possible_dictionary)
-    print(decision)
+    
+    return print(decision)
 
     
 
 
+
+
+
+print('agora o angustia')
+basic_NLP('angustia.txt', 'LIWC2007_Portugues_win.dic')
+print('seu jorge')
 basic_NLP('felicidade.txt', 'LIWC2007_Portugues_win.dic')
-#basic_NLP('angustia.txt', 'LIWC2007_Portugues_win.dic')
 
 
-
-#print("O tipo de arquivo de felicidade é ", type(felicidade))
-
-#angustia = open('angustia.txt', 'r', encoding='utf-8')
-#print(angustia.read()) 
-#print("O tipo de de arquivo de angustia é ", type(angustia))
-
-
-###Arquivo usado para analisar emoções
-# liwc_dic = open ("LIWC2007_Portugues_win.dic", "r", encoding="utf-8") #importing file
-#print(liwc_dic.read(10000)) #reading the first 10000 bytes to make sure it's right
-#print("tipo de arquivo do dic ", type(liwc_dic)) #discovering what kind of file it is
-
-### Iniciando a leitura dos arquivos
