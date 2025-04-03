@@ -55,7 +55,7 @@ def read_liwc(dictionary):
     liw_dic_emotions = [] #list of strings for numbers and its associated emotion
     separation_string = '%'
     separation_string_count = 0
-    liw_dic_words = []
+    liw_dic_words = [] #list of strings for words and the numbers emotions associated
 
     for line in liwc_dic: #separating the first part
         if line == separation_string:
@@ -90,18 +90,26 @@ def read_liwc(dictionary):
     separation_string_count = 0
     #Time to get the second dict using the list of lists new dict
     for line in liwc_dic: #separating the first part
-        if line == separation_string:
-            separation_string_count += 1
-        else:
-            continue
-        
-        if separation_string_count >= 2:
+       if separation_string_count <= 1:
+           if line == separation_string:
+               separation_string_count += 1
+            
+       else:
             liw_dic_words.append(line)
-          
-        else:
-            continue
     
-    print(liw_dic_words)
+    print(liw_dic_words[3])
+
+
+
+    # for line in liwc_dic: #separating the first part
+    #    if separation_string_count <= 1:
+    #        if line == separation_string:
+    #            separation_string_count += 1
+            
+    #     else:
+    #         liw_dic_words.append(line)
+    
+    # print(liw_dic_words[3])
     
     # for line in liwc_dic:
     #     if separation_string_count >= 2:
