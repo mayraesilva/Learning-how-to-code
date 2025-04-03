@@ -113,3 +113,25 @@ palavra_sentimentos = []
 palavra_sentimentos.append([palavra, emocoes])
 
 print(palavra_sentimentos)
+
+
+# Assume separation_string_count is initialized to 0
+# for line in liwc_dic:
+#     if separation_string_count <= 1:
+#         if line == separation_string:
+#             separation_string_count += 1
+#         # Skip the rest of the loop until we see the second occurrence
+#         continue
+#     # Once we've seen the separation string twice, start appending lines
+#     liw_dic_words.append(line)
+
+# print(liw_dic_words[3])
+
+
+
+lista = [{'amora':['1', '2', '3']}, {'banana': ['5', '6', '7']}]
+
+roxo = lista[0]
+amarelo = lista[1]
+
+print(roxo)

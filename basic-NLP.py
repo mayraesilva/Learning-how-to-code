@@ -145,16 +145,16 @@ def get_emotion(word, list_that_contains_dicts):
     #
     real_dict_emotions = list_that_contains_dicts[0]
     real_dict_words = list_that_contains_dicts[1]
-
-
-
+    emotions = []
 
 
     if word in real_dict_words.keys():
         word_class = real_dict_words[word]
         for dict_key in word_class:
             if dict_key in real_dict_emotions.keys():
-                return real_dict_emotions[dict_key]
+                emotions.append(real_dict_emotions[dict_key])
+    #print(emotions)
+    return emotions
     
 
 
@@ -186,30 +186,22 @@ def decide_emotion(lines_as_tokens, possible_dict):
 
 
     for word in word_analysis:
-        if word == 'posemo':
-            positivity.append(word)
+        for emotion in word:
+            if emotion == 'posemo':
+                positivity.append(emotion)
 
-        elif word == 'negemo':
-            negativity.append(word)
+            elif emotion == 'negemo':
+                negativity.append(emotion)
         
-        elif word == 'swear':
-            swear.append(word)
+            elif emotion == 'swear':
+                swear.append(emotion)
 
-        elif word == 'anx':
-            anxiousness.append(word)
+            elif emotion == 'anx':
+                print(word)
+                anxiousness.append(emotion)
             
 
-    # if get_emotion(word) == 'posemo':
-    #     positivity.append(get_emotion(word))
-
-    # elif get_emotion(word) == 'negemo':
-    #     negativity.append(get_emotion(word))
-
-    # elif get_emotion(word) == 'swear':
-    #     swear.append(get_emotion(word))
-
-    # elif get_emotion(word) == 'anx':
-    #     anxiousness.append(get_emotion(word))
+   
     
     print(f'{len(swear)} palavra(s) ofensiva(s), {len(swear)} palavra(s) de ansiedade')
     
@@ -223,10 +215,10 @@ def decide_emotion(lines_as_tokens, possible_dict):
 
     if positive_text > negative_text:
        #print("O tom geral do texto é positivo")
-       return f"O tom geral do texto é positivo {positive_text:.2f}% versus {negative_text:.2f}%"
+       return f"O tom geral do texto é positivo {positive_text:.2f}% versus {negative_text:.2f}% negativo"
     else:
         #print("O tom geral do texto é negativo")
-        return f"O tom geral do texto é negativo {negative_text:.2f}% versus {positive_text:.2f}%"
+        return f"O tom geral do texto é negativo {negative_text:.2f}% versus {positive_text:.2f}% positivo"
     
 
 def basic_NLP(file, dictionary):
@@ -248,7 +240,7 @@ def basic_NLP(file, dictionary):
 
 
 basic_NLP('felicidade.txt', 'LIWC2007_Portugues_win.dic')
-basic_NLP('angustia.txt', 'LIWC2007_Portugues_win.dic')
+#basic_NLP('angustia.txt', 'LIWC2007_Portugues_win.dic')
 
 
 
