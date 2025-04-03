@@ -97,26 +97,8 @@ def read_liwc(dictionary):
        else:
             liw_dic_words.append(line)
     
-    print(liw_dic_words[3])
+    #print(liw_dic_words[3]) #To check if we're keeping only what we want
 
-
-
-    # for line in liwc_dic: #separating the first part
-    #    if separation_string_count <= 1:
-    #        if line == separation_string:
-    #            separation_string_count += 1
-            
-    #     else:
-    #         liw_dic_words.append(line)
-    
-    # print(liw_dic_words[3])
-    
-    # for line in liwc_dic:
-    #     if separation_string_count >= 2:
-    #         liw_dic_words.append(line)
-    
-    #Now liw_dic_words is a list of strings where each string is a line
-    #print(liw_dic_words)
 
     new_liwc_dic_words = [] #list of lists, where each element is a list of word 
     #and its associated emotions by their numbers
@@ -229,20 +211,22 @@ def decide_emotion(lines_as_tokens, possible_dict):
     # elif get_emotion(word) == 'anx':
     #     anxiousness.append(get_emotion(word))
     
+    print(f'{len(swear)} palavra(s) ofensiva(s), {len(swear)} palavra(s) de ansiedade')
     
 
     positive_emotions = len(positivity)
     negative_emotions = len(negativity) + len(swear) + len(anxiousness)
 
-    positive_text = positive_emotions / text_length
-    negative_text = negative_emotions / text_length
+
+    positive_text = (positive_emotions / text_length) * 100 #porcertagem
+    negative_text = (negative_emotions / text_length) * 100
 
     if positive_text > negative_text:
-       print("O tom geral do texto é positivo")
-       return "posemo"
+       #print("O tom geral do texto é positivo")
+       return f"O tom geral do texto é positivo {positive_text:.2f}% versus {negative_text:.2f}%"
     else:
-        print("O tom geral do texto é negativo")
-        return "negemo"
+        #print("O tom geral do texto é negativo")
+        return f"O tom geral do texto é negativo {negative_text:.2f}% versus {positive_text:.2f}%"
     
 
 def basic_NLP(file, dictionary):
