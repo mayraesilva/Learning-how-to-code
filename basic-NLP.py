@@ -85,10 +85,27 @@ def read_liwc(dictionary):
     emotions_dict = dict(new_liwc_dic_emotions)
     #print(emotions_dict) #check if it has become a dictionary
 
+
+
+    separation_string_count = 0
     #Time to get the second dict using the list of lists new dict
-    for line in liwc_dic:
+    for line in liwc_dic: #separating the first part
+        if line == separation_string:
+            separation_string_count += 1
+        else:
+            continue
+        
         if separation_string_count >= 2:
             liw_dic_words.append(line)
+          
+        else:
+            continue
+    
+    print(liw_dic_words)
+    
+    # for line in liwc_dic:
+    #     if separation_string_count >= 2:
+    #         liw_dic_words.append(line)
     
     #Now liw_dic_words is a list of strings where each string is a line
     #print(liw_dic_words)
@@ -158,7 +175,7 @@ def get_emotion(word, list_that_contains_dicts):
   
 
 #recebe uma lista de listas e devolve uma porcentagem para avaliar o tom
-def decide_emotion(lines_as_tokens):
+def decide_emotion(lines_as_tokens, possible_dict):
     text_length = [] #lista com tamanho de cada linha
     for line in lines_as_tokens:
         text_length.append(len(line))
@@ -169,7 +186,7 @@ def decide_emotion(lines_as_tokens):
     word_analysis = []
     for line in lines_as_tokens:
         for word in line:
-           word_analysis.append(get_emotion(word))
+           word_analysis.append(get_emotion(word, possible_dict))
 
     #Emotions we are searching for:
     positivity = []
@@ -231,8 +248,8 @@ def basic_NLP(file, dictionary):
     for line in new_lines:
         lines_as_tokens.append(tokenize(line))
 
-    final_dictionary = read_liwc(dictionary)
-    decision = decide_emotion(lines_as_tokens)
+    possible_dictionary = read_liwc(dictionary)
+    decision = decide_emotion(lines_as_tokens, possible_dictionary)
     print(decision)
 
     
