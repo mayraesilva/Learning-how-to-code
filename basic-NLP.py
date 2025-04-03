@@ -248,7 +248,7 @@ def basic_NLP(file, dictionary):
 
 
 basic_NLP('felicidade.txt', 'LIWC2007_Portugues_win.dic')
-
+basic_NLP('angustia.txt', 'LIWC2007_Portugues_win.dic')
 
 
 
