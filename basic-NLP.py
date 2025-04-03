@@ -62,7 +62,7 @@ def read_liwc(dictionary):
             separation_string_count += 1
         liw_dic_emotions.append(line)
         if separation_string_count >= 2:
-            print("emotions are separetaded, breaking...")
+            #print("emotions are separetaded, breaking...")
             break
             
         else:
@@ -142,7 +142,7 @@ def get_emotion(word, list_that_contains_dicts):
     fictional_dict = {'126': 'posemo'}
     fictional_dict_word = {'felicidade': ['126', '125', '359']}
 
-    #real_dict = read_liwc(dictionary)
+    #
     real_dict_emotions = list_that_contains_dicts[0]
     real_dict_words = list_that_contains_dicts[1]
 
@@ -150,11 +150,11 @@ def get_emotion(word, list_that_contains_dicts):
 
 
 
-    if word in fictional_dict_word.keys():
-        word_class = fictional_dict_word[word]
+    if word in real_dict_words.keys():
+        word_class = real_dict_words[word]
         for dict_key in word_class:
-            if dict_key in fictional_dict.keys():
-                return fictional_dict[dict_key]
+            if dict_key in real_dict_emotions.keys():
+                return real_dict_emotions[dict_key]
     
 
 
